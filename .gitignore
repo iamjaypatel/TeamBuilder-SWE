@@ -3,3 +3,5 @@ OS junk files
 *.DS_Store
 .idea/
 env/
+env/
+.idea
