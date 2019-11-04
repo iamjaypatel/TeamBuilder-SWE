@@ -1,0 +1,9 @@
+{% extends "login/base.html" %}
+
+{% block body %}
+    {% for post in posts %}
+        <h1>{{ post.projectName }}</h1>
+        <h2>Admin: {{ post.projectAdmin}}</h2>
+        <p>{{ post.descr }}</p>
+    {% endfor %}
+{% endblock body %}
