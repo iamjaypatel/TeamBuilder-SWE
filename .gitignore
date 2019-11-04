@@ -3,5 +3,8 @@ OS junk files
 *.DS_Store
 .idea/
 env/
+<<<<<<< HEAD
 env/
+=======
+>>>>>>> origin/master
 .idea
