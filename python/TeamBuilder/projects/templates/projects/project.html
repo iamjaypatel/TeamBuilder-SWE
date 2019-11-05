@@ -1,0 +1,11 @@
+{% extends "login/base.html" %}
+
+{% block body %}
+    <div class="container">
+        <h1>{{ posts.projectName }}</h1>
+        <p>Project Admin: {{ posts.projectAdmin }}</p>
+        <p>Overview: {{ posts.descr }}</p>
+        <p>{{ posts.spaceAvailable }} spaces available</p>
+        <a class="text-primary" href="#">Join Project</a>
+    </div>
+{% endblock body %}
