@@ -5,7 +5,7 @@ from django.core.validators import RegexValidator
 # Create your models here.
 class Profile(models.Model):
     username_regex = RegexValidator(
-        regex=r'^ [a-zA-Z0-9]([._](?![._]) | [a-zA-Z0-9]){6, 18}[a-zA-Z0-9]$', message="1. Cannot start or have  '_' or '.' together, only be used once \n 2. Length must be between 8 to 20 characters. \n 3. Only contains alphanumeric characters, '.' and '_' ")
+        regex=r'^[a-zA-Z0-9]([._](?![._])|[a-zA-Z0-9]){6,18}[a-zA-Z0-9]$', message="1. Cannot start or have  '_' or '.' together, only be used once \n 2. Length must be between 8 to 20 characters. \n 3. Only contains alphanumeric characters, '.' and '_' ")
     profile_username = models.CharField(
         'Username', validators=[username_regex], max_length=20, primary_key=True)
     profile_password = models.CharField(
@@ -26,12 +26,13 @@ class Project(models.Model):
     project_id = models.AutoField(primary_key=True)
     project_Admin = models.ForeignKey(Profile, on_delete=models.CASCADE)
     project_Name = models.CharField('Name', max_length=60)
-    project_Description = models.CharField('Description', max_length=300)
-    project_MaxCapacity = models.IntegerField(
-        'Maximum Capacity', default=10, editable=False)
-    project_SpaceTaken = models.IntegerField(
-        'Space Taken', default=1, editable=False)
-    project_SpaceAvailable = models.IntegerField(blank=True, editable=False)
+    project_Description = models.TextField('Description', max_length=300)
+    project_MaxCapacity = models.PositiveIntegerField(
+        'Maximum Capacity', default=10)
+    project_SpaceTaken = models.PositiveIntegerField(
+        'Space Taken', default=1)
+    project_SpaceAvailable = models.PositiveIntegerField(
+        blank=True, editable=True)
 
 
 class Project_Involved(models.Model):
