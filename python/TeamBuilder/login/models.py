@@ -4,8 +4,10 @@ from django.core.validators import RegexValidator
 
 # Create your models here.
 class Profile(models.Model):
-    profile_username = models.CharField('Username',
-                                        max_length=60, primary_key=True)
+    username_regex = RegexValidator(
+        regex=r'^ [a-zA-Z0-9]([._](?![._]) | [a-zA-Z0-9]){6, 18}[a-zA-Z0-9]$', message="1. Cannot start or have  '_' or '.' together, only be used once \n 2. Length must be between 8 to 20 characters. \n 3. Only contains alphanumeric characters, '.' and '_' ")
+    profile_username = models.CharField(
+        'Username', validators=[username_regex], max_length=20, primary_key=True)
     profile_password = models.CharField(
         'Password', max_length=60)
     profile_firstName = models.CharField(
