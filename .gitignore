@@ -3,3 +3,4 @@ OS junk files
 *.DS_Store
 env/
 .idea
+__pycache__/
