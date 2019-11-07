@@ -1,31 +1,12 @@
 from django.http import HttpResponse
 from django.shortcuts import render
-
-posts = [
-    {
-        'projectID': '11111',
-        'projectAdmin': 'Sam',
-        'projectName': 'Deliverable5',
-        'descr': 'Insert description here',
-        'maxCap': '10',
-        'spaceTaken': '1',
-        'spaceAvailable': '9'
-    },
-    {
-        'projectID': '22222',
-        'projectAdmin': 'Jon',
-        'projectName': 'Database Stuff',
-        'descr': 'Another description here',
-        'maxCap': '10',
-        'spaceTaken': '5',
-        'spaceAvailable': '5'
-    }
-]
+from login.models import Project, Profile
 
 # Create your views here.
 def home(request):
+    projects = Project.objects.all()
     data = {
-        'posts': posts
+        'projects': projects
     }
     return render(request,'projects/projhome.html', data)
 
