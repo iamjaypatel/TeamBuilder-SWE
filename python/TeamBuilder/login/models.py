@@ -33,6 +33,8 @@ class Project(models.Model):
         'Space Taken', default=1)
     project_SpaceAvailable = models.PositiveIntegerField(
         blank=True, editable=True)
+    # Space 1: Admin
+    # Space 2-9, Profile.
 
 
 class Project_Involved(models.Model):
