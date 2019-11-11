@@ -58,4 +58,4 @@ def uniqueP(request, project_id):
     data = {
         'posts': posts
     }
-    return render(request,'project/project.html', data)
+    return render(request,'projects/project.html', data)

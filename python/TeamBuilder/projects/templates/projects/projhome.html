@@ -2,24 +2,35 @@
 
 {% block body %}
 
-    <head>
-        <title>Teambuilder - Projects</title>
-    </head>
+<head>
+    <title>Teambuilder - Projects</title>
+</head>
 
-    {% for post in posts %}
-        <div class="row mb-2">
-            <div class="col-md-6">
-                <div class="card flex-md-row mb-4 box-shadow bg-muted h-md-250">
-                    <div class="card-body d-flex flex-column align-items-start">
-                        <h3 class="mb-0">
-                            <a class="text-primary" href={{ post.ProjectID }}>{{ post.projectName }}</a>
-                        </h3>
-                        <div class="mb-1 text-dark">{{ post.projectAdmin }}</div>
-                        <p class="card-text text-dark mb-auto">{{ post.descr }}</p>
-                        <div class="mb-1 text-muted">{{ post.spaceTaken }} out of {{ post.maxCap }} users</div>
+{% for post in posts %}
+<div class="container-fluid p-5">
+    <div class="card p-1">
+        <div class="card-body">
+            <div class="card-header">
+                <h2>{{ post.projectName }} </h2>
+            </div>
+            <h4 class="card-title p-2">Project Administrator : {{ post.projectAdmin }}</h5>
+                <div class="container">
+                    <div class="row">
+                        <div class="col-sm">
+                            <h4>Project Description : </h4>
+                            <p class="card-text">{{ post.descr }}</p>
+                        </div>
+                        <div class="col-sm text-center">
+                            <h4>Current Number of Members in Project</h4>
+                            <h5> {{ post.spaceTaken }} / 10 </h5>
+                        </div>
                     </div>
                 </div>
-            </div>
         </div>
-    {% endfor %}
+        <div class="card-footer text-muted text-center">
+            <a href="{% url 'uProject' project_id=post.projectID %}" class="card-link">View Project</a>
+        </div>
+    </div>
+</div>
+{% endfor %}
 {% endblock body %}
