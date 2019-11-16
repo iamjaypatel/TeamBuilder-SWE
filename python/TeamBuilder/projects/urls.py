@@ -4,6 +4,6 @@ from . import views
 
 urlpatterns = [
     path('', views.home, name='projects-home'),
-    path('11111/', views.unique, name='project'),
-    path('<int:project_id>/',views.uniqueP, name ='uProject'),
+    path('<int:ID>/',views.uniqueP, name ='uProject'),
+    path('createProj', views.createProjView, name='createP'),
 ]
