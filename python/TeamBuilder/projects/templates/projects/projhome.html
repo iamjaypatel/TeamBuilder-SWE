@@ -19,7 +19,7 @@
                 <div class="card flex-md-row mb-4 box-shadow bg-muted h-md-250">
                     <div class="card-body d-flex flex-column align-items-start">
                         <h3 class="mb-0">
-                            <a class="text-primary" href='{{ proj.project_id }}'>{{ proj.project_Name }}</a>
+                            <a class="text-primary" href="{% url 'projects-home' %}{{ proj.project_id }}">{{ proj.project_Name }}</a>
                         </h3>
                         <div class="mb-1 text-dark">{{ proj.project_Admin }}</div>
                         <p class="card-text text-dark mb-auto">{{ proj.project_Description }}</p>

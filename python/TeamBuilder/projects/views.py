@@ -33,3 +33,15 @@ def uniqueP(request, ID):
         'posts': posts
     }
     return render(request,'projects/project.html', data)
+
+def myProjectsView(request):
+    # Get all projects with current user as admin, display on projects page
+    if request.user.is_authenticated:
+        curProf = Profile.objects.get(profile_username = request.user.username)
+        projects = Project.objects.filter(project_Admin = curProf)
+        data = {
+            'projects': projects
+        }
+        return render(request, 'projects/projhome.html', data)
+    else:
+        return render(request, 'login/')
