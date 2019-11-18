@@ -40,6 +40,6 @@ class Project(models.Model):
 class Project_Involved(models.Model):
     profile_username = models.ForeignKey(Profile, on_delete=models.CASCADE)
     project_id = models.ForeignKey(Project, on_delete=models.CASCADE)
-
+    project_accepted = models.BooleanField(default=False)
     class Meta:
         unique_together = (("profile_username", "project_id"),)

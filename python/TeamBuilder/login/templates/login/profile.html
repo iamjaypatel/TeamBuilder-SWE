@@ -1,0 +1,12 @@
+{% extends "login/base.html" %}
+
+{% block body %}
+<div class="row mb-2">
+    <div class="col-md-3">
+        <container>
+            <h2>{{ user.profile_firstName }} {{ user.profile_lastName }} ({{ user.profile_username }})</h2>
+            <p>Email: {{ user.profile_Email }}</p>
+        </container>
+    </div>
+</div>
+{% endblock %}
