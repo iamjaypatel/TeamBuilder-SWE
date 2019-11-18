@@ -1,16 +1,13 @@
 {% extends "login/base.html" %}
 
 {% block body %}
-<div class="container">
-    <h1>{{ posts.projectName }}</h1>
-    <p>Project Admin: {{ posts.projectAdmin }}</p>
-    <p>Overview: {{ posts.descr }}</p>
-    <p>{{ posts.spaceAvailable }} spaces available</p>
-    <a class="text-primary" href="#">Join Project</a>
-</div>
-<div class="container">
-    <div class="row justify-content-center">
-        <h1> {{ posts.projectName }}</h1>
+    <div class="container">
+        <div class ="container"></div>
+        <h1>{{ posts.project_Name }}</h1>
+        <p>Project Admin: {{ posts.project_Admin }}</p>
+        <p>Overview: {{ posts.project_Description }}</p>
+        <p>{{ posts.project_SpaceAvailable }} spaces available</p>
+        <a class="text-primary" href="#">Join Project</a>
     </div>
     <div class="row">
         <div class="col-7">

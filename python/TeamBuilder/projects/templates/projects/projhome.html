@@ -6,29 +6,29 @@
     <title>Teambuilder - Projects</title>
 </head>
 
-{% for post in posts %}
+{% for proj in projects %}
 <div class="container-fluid p-5">
     <div class="card p-1">
         <div class="card-body">
             <div class="card-header">
-                <h2>{{ post.projectName }} </h2>
+                <h2>{{ poj.project_Name }} </h2>
             </div>
-            <h4 class="card-title p-2">Project Administrator : {{ post.projectAdmin }}</h5>
+            <h4 class="card-title p-2">Project Administrator : {{ proj.project_Admin }}</h5>
                 <div class="container">
                     <div class="row">
                         <div class="col-sm">
                             <h4>Project Description : </h4>
-                            <p class="card-text">{{ post.descr }}</p>
+                            <p class="card-text">{{ proj.project_Description }}</p>
                         </div>
                         <div class="col-sm text-center">
                             <h4>Current Number of Members in Project</h4>
-                            <h5> {{ post.spaceTaken }} / 10 </h5>
+                            <h5> {{ proj.project_SpaceTaken }} / {{ proj.project_MaxCapacity }} </h5>
                         </div>
                     </div>
                 </div>
         </div>
         <div class="card-footer text-muted text-center">
-            <a href="{% url 'project' project_id=post.projectID %}" class="card-link">View Project</a>
+             <a class="text-primary" href="{% url 'projects-home' %}{{ proj.project_id }}">{{ proj.project_Name }}</a>
         </div>
     </div>
 </div>
