@@ -33,13 +33,14 @@ class Project(models.Model):
         'Space Taken', default=1)
     project_SpaceAvailable = models.PositiveIntegerField(
         blank=True, editable=True)
-    # Space 1: Admin
-    # Space 2-9, Profile.
 
 
 class Project_Involved(models.Model):
-    profile_username = models.ForeignKey(Profile, on_delete=models.CASCADE)
-    project_id = models.ForeignKey(Project, on_delete=models.CASCADE)
-    project_accepted = models.BooleanField(default=False)
+    project_involved_username = models.ForeignKey(
+        Profile, on_delete=models.CASCADE)
+    project_involved_id = models.ForeignKey(Project, on_delete=models.CASCADE)
+    project__involved_accepted = models.BooleanField(default=False)
+
     class Meta:
-        unique_together = (("profile_username", "project_id"),)
+        unique_together = (
+            ("project_involved_username", "project_involved_id"),)
