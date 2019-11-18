@@ -1,6 +1,6 @@
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
-from login.models import Project, Profile
+from login.models import Project, Profile, Project_Involved
 from projects.forms import createProjForm
 
 # Create your views here.
@@ -43,5 +43,30 @@ def myProjectsView(request):
             'projects': projects
         }
         return render(request, 'projects/projhome.html', data)
+    else:
+        return render(request, 'login/')
+
+def joinP(request, ID):
+    if request.user.is_authenticated:
+        project = Project.objects.get(project_id = ID)
+
+        if not project:
+            print()
+            # ToDo: add failure alert
+
+        elif project.project_SpaceAvailable <= 0:
+            print()
+            # ToDo: add failure alert
+
+        else:
+            pie = Project_Involved() # Project-Involved Entry
+            pie.profile_username = request.user.username
+            pie.project_id = ID
+            pie.project_accepted = False
+            pie.save()
+        # Check space, add project_involved entry
+        # Q: when should we modify the project DB? - Acceptance or immediately, checking flag at reference
+
+        return HttpResponseRedirect('/projects/myProjects/')
     else:
         return render(request, 'login/')
