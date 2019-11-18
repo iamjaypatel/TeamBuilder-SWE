@@ -19,7 +19,8 @@ def myprof(request): # when clicking on "My Profile", gets profile of active use
                 userProf.save()
         else:
             form = editProfForm()
-        return render(request, 'login/myprofile.html', {'form': form})
+        curUser = Profile.objects.get(profile_username = request.user.username)
+        return render(request, 'login/myprofile.html', {'form': form, 'curUser': curUser})
     else:
         return render(request,'login/')
 
@@ -29,6 +30,6 @@ def profile(request, username): # when username is searched through URL, if curr
         data = {
             'user':user
         }
-        return render(request,'login/myprofile.html', data)
+        return render(request,'login/profile.html', data)
     else:
         return render(request,'login/')

@@ -1,7 +1,8 @@
 {% extends "login/base.html" %}
 {% block body %}
     <div class="container">
-        <h1>Hello,  </h1>
+        <h1>Hello, {{ curUser.profile_firstName }} {{ curUser.profile_lastName }}</h1>
+        <p>Edit your info:</p>
         <form method="post">
             {% csrf_token %}
             {{ form }}
