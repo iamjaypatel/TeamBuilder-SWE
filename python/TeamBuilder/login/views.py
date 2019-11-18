@@ -1,10 +1,28 @@
-from django.http import HttpResponse
-from django.shortcuts import render
+from django.http import HttpResponse, HttpResponseRedirect
+from django.shortcuts import render,redirect
 from .models import Profile
 from login.forms import editProfForm
+from django.contrib.auth import authenticate, login, logout
 
 # Create your views here.
+def logout_view(request):
+    logout(request)
+    return redirect(index)
+
 def index(request):
+    if request.user.is_authenticated:
+        return HttpResponseRedirect('/projects/')
+    username = request.POST.get('username')
+    password = request.POST.get('password')
+    user = authenticate(request, username=username, password=password)
+    if user is not None:
+        login(request, user)
+        # Redirect to a success page.
+        return HttpResponseRedirect('/projects/')
+        ...
+    else:
+        # Return an 'invalid login' error message.
+        ...
     return render(request,'login/index.html')
 
 def myprof(request): # when clicking on "My Profile", gets profile of active user then loads page
