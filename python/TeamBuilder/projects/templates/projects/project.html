@@ -2,68 +2,90 @@
 
 {% block body %}
 <div class="container">
-    <div class="container">
+    <div class="container text-center p-3">
         <h1>{{ posts.project_Name }}</h1>
-        <p>Project Admin: {{ posts.project_Admin }}</p>
-        <p>Overview: {{ posts.project_Description }}</p>
         <p>{{ posts.project_SpaceAvailable }} spaces available</p>
-        <a class="text-primary" href="#">Join Project</a>
+        <a class="text-primary" href="#">Request to Join Project</a>
     </div>
 </div>
-<div class="row">
-    <div class="col-7">
-        <div class="row">
-            <div class="col">
-                1 of 3
-            </div>
-            <div class="col-6">
-                2 of 3 (wider)
-            </div>
-            <div class="col">
-                3 of 3
-            </div>
+<div class="container text-center p-3">
+    <div class="row">
+        <div class="col">
+            <h2>Project Overview</h2>
+            <p>{{ posts.project_Description }}</p>
         </div>
-        <div class="row">
-            <div class="col">
-                1 of 3
-            </div>
-            <div class="col-5">
-                2 of 3 (wider)
-            </div>
-            <div class="col">
-                3 of 3
-            </div>
+        <div class="col">
+            <h2>Project Admin</h2>
+            <p>{{ posts.project_Admin }}</p>
+            <P></P>
         </div>
     </div>
-    <div class="col justify-content-center">
-        <h2>Posistion</h2>
-        <h3>1</h3>
-        <h3>2</h3>
-        <h3>3</h3>
-        <h3>4</h3>
-        <h3>5</h3>
-        <h3>6</h3>
-        <h3>7</h3>
-        <h3>8</h3>
-        <h3>9</h3>
-        <h3>10</h3>
-
-    </div>
-    <div class="col justify-content-center">
-        <h2>Held by </h2>
-        <!-- Here we will populate the possistions of project -->
-        <h3>empty</h3>
-        <h3>empty</h3>
-        <h3>Temp</h3>
-        <h3>Temp</h3>
-        <h3>Temp</h3>
-        <h3>Temp</h3>
-        <h3>Temp</h3>
-        <h3>Temp</h3>
-        <h3>Temp</h3>
-        <h3>Temp</h3>
-
-    </div>
+</div>
+<div class="container text-center p-3">
+    <h2>Events and Meetings</h2>
+</div>
+<div class="container p-3">
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th scope="col">Posistion</th>
+                <th scope="col">User</th>
+                <th scope="col">Email</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <th scope="row">1</th>
+                <td>{{ posts.project_Admin }}</td>
+                <td></td>
+            </tr>
+            <tr>
+                <th scope="row">2</th>
+                <td>Empty</td>
+                <td></td>
+            </tr>
+            <tr>
+                <th scope="row">3</th>
+                <td>Empty</td>
+                <td></td>
+            </tr>
+            <tr>
+                <th scope="row">4</th>
+                <td>Empty</td>
+                <td></td>
+            </tr>
+            <tr>
+                <th scope="row">5</th>
+                <td>Empty</td>
+                <td></td>
+            </tr>
+            <tr>
+                <th scope="row">6</th>
+                <td>Empty</td>
+                <td></td>
+            </tr>
+            <tr>
+                <th scope="row">7</th>
+                <td>Empty</td>
+                <td></td>
+            </tr>
+            <tr>
+                <th scope="row">8</th>
+                <td>Empty</td>
+                <td></td>
+            </tr>
+            <tr>
+                <th scope="row">9</th>
+                <td>Empty</td>
+                <td></td>
+            </tr>
+            <tr>
+                <th scope="row">10</th>
+                <td>Empty</td>
+                <td></td>
+            </tr>
+        </tbody>
+    </table>
 </div>
 </div>
 {% endblock body %}
