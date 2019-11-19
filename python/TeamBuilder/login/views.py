@@ -70,13 +70,16 @@ def profile(request, username): # when username is searched through URL, if curr
 
     if request.user.is_authenticated:
         editAccess = False
-        # userView = Profile.objects.get(profile_username = username)
+        userView = Profile.objects.get(profile_username = username)
+
+        if userView.profile_username == request.user.username:
+            editAccess = True
+            
         data = {
-            # 'user':userView,
+            'userView':userView,
             'access':editAccess
         }
-        # if userView.profile_username == request.user.username:
-        #     editAccess = True
+       
         return render(request,'login/profile.html', data)
     else:
         return render(request,'login/')

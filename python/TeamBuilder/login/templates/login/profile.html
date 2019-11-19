@@ -2,14 +2,18 @@
 
 {% block body %}
 <div class="container text-center">
-    {% if access%}
-    <div class="row">
+    {% if access %}
+    <div class="row text-center">
         <h2>Can edit this page</h2>
-
+        {% csrf_token %}
+        {{user.username}}
+        {{userView.profile_username}}
     </div>
     {% else %}
     <div class="row">
         <h2>Can not edit this page</h2>
+        {{user.username}}
+        {{userView.profile_username}}
 
     </div>
 
