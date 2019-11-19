@@ -3,11 +3,34 @@ from django.shortcuts import render,redirect
 from .models import Profile
 from login.forms import editProfForm
 from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.forms import UserCreationForm
 
 # Create your views here.
 def logout_view(request):
     logout(request)
     return redirect(index)
+
+def register(request):
+    if request.method == "POST":
+        form = UserCreationForm(request.POST)
+        if form.is_valid():
+            user = form.save()
+            # newProfile = Profile()
+            username = form.cleaned_data.get('username')
+            password = form.cleaned_data.get('password')
+            # newProfile.profile_username = username
+            # newProfile.profile_password = password
+            # newProfile.save()
+            login(request, user)
+            return redirect(index)
+        else:
+            for msg in form.error_messages:
+                print(form.error_messages[msg])
+
+            return render(request = request,template_name = "login/register.html",context={"form":form})
+    form = UserCreationForm
+    return render(request = request,template_name = "login/register.html",context={"form":form})
+
 
 def index(request):
     if request.user.is_authenticated:
@@ -43,11 +66,17 @@ def myprof(request): # when clicking on "My Profile", gets profile of active use
         return render(request,'login/')
 
 def profile(request, username): # when username is searched through URL, if current user is logged-in find searched user and load profile page
+    # if request.method == 'POST':
+
     if request.user.is_authenticated:
-        user = Profile.objects.get(profile_username = username)
+        editAccess = False
+        # userView = Profile.objects.get(profile_username = username)
         data = {
-            'user':user
+            # 'user':userView,
+            'access':editAccess
         }
+        # if userView.profile_username == request.user.username:
+        #     editAccess = True
         return render(request,'login/profile.html', data)
     else:
         return render(request,'login/')

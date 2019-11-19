@@ -1,12 +1,26 @@
 {% extends "login/base.html" %}
 
 {% block body %}
-<div class="row mb-2">
+<div class="container text-center">
+    {% if access%}
+    <div class="row">
+        <h2>Can edit this page</h2>
+
+    </div>
+    {% else %}
+    <div class="row">
+        <h2>Can not edit this page</h2>
+
+    </div>
+
+    {% endif %}
+</div>
+<!-- <div class="row mb-2">
     <div class="col-md-3">
         <container>
             <h2>{{ user.profile_firstName }} {{ user.profile_lastName }} ({{ user.profile_username }})</h2>
             <p>Email: {{ user.profile_Email }}</p>
         </container>
     </div>
-</div>
+</div> -->
 {% endblock %}
