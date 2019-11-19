@@ -6,8 +6,8 @@
     <div class="row text-center">
         <h2>Can edit this page</h2>
         {% csrf_token %}
-        {{user.username}}
-        {{userView.profile_username}}
+        {{user.username}} is the current user logged in and
+        {{userView.profile_username}} is the profile you are viewing 
     </div>
     {% else %}
     <div class="row">
