@@ -3,25 +3,14 @@
 {% block body %}
 <div class="login-page">
   <div class="form">
-    {% if user.is_authenticated %}
-    <h2>Hello {{ user.username }}</h2>
-    {% else %}
-    <h2>Register or Login if you'd like to</h2>
-    {% endif %}
-    <form class="register-form">
-      <input type="text" placeholder="name" />
-      <input type="password" placeholder="password" />
-      <input type="text" placeholder="email address" />
-      <button>create</button>
-      <p class="message">Already registered? <a href="{% url 'login-projects' %">Sign In</a></p>
-          </form>
-          <form class="login-form" method ="post">
-              {% csrf_token %}
-              {{ form.as_p }}
-            <input id= " username" name="username" type="text" placeholder="username" />
-        <input id="password" name="password" type="password" placeholder="password" />
-        <button type="submit">login</button>
-        <p class="message">Not registered? <a href="#">Create an account</a></p>
+    <h2>Login</h2>
+    <form class="login-form" method="post">
+      {% csrf_token %}
+      {{ form.as_p }}
+      <input id=" username" name="username" type="text" placeholder="username" />
+      <input id="password" name="password" type="password" placeholder="password" />
+      <button type="submit">login</button>
+      <p class="message">Not registered? <a href="{% url 'register' %}">Create an account</a></p>
     </form>
   </div>
 </div>
