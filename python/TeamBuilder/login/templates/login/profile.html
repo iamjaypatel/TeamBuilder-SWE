@@ -3,20 +3,18 @@
 {% block body %}
 <div class="container text-center">
     {% if access %}
-    <div class="row text-center">
-        <h2>Can edit this page</h2>
-        {% csrf_token %}
-        {{user.username}}
-        {{userView.profile_username}}
-    </div>
+    <h2>Feel free to edit your Profile</h2>
+    {% csrf_token %}
+    <p class="p-3">{{user.username}} is the current user logged in and
+        {{userView.profile_username}} is the profile you are viewing </p>
+    <p class="p-3"> First Name : {{userView.profile_firstName}}</p>
+    <p class="p-3"> Last Name : {{userView.profile_lastName}} </p>
+    <p class="p-3"> Email: {{userView.profile_Email}} </p>
     {% else %}
-    <div class="row">
-        <h2>Can not edit this page</h2>
-        {{user.username}}
-        {{userView.profile_username}}
-
-    </div>
-
+    <h2 class="p-3">{{userView.profile_username}}</h2>
+    <p class="p-3"> First Name : {{userView.profile_firstName}}</p>
+    <p class="p-3"> Last Name : {{userView.profile_lastName}} </p>
+    <p class="p-3"> Email: {{userView.profile_Email}} </p>
     {% endif %}
 </div>
 <!-- <div class="row mb-2">
