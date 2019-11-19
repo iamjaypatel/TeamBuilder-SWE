@@ -69,7 +69,7 @@ def joinP(request, ID):
             print()
             # ToDo: add failure alert: no space available
 
-        elif Project_Involved.objects.get(project_involved_id = project, project_involved_username = request.user.username) is not None:
+        elif Project_Involved.objects.filter(project_involved_id = project, project_involved_username = request.user.username):
             print()
             # ToDo: add failure alert: already in project
 

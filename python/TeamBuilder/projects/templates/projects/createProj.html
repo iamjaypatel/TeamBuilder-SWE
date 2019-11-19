@@ -1,11 +1,15 @@
 {% extends "login/base.html" %}
 {% block body %}
     <div class="container">
-        <h1>Create Project</h1>
-        <form method="post">
-            {% csrf_token %}
-            {{ form }}
-            <input type="submit" value="Submit">
-        </form>
+        <div class="row">
+            <h1>Create Project</h1>
+        </div>
+        <div class="row">
+            <form method="post">
+                {% csrf_token %}
+                <ul>{{ form.as_ul }}</ul>
+                <input type="submit" value="Submit">
+            </form>
+        </div>
     </div>
 {% endblock body %}
