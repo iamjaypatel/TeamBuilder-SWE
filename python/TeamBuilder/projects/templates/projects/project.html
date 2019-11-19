@@ -3,8 +3,8 @@
 {% block body %}
 <div class="container">
     <div class="container text-center p-3">
-        <h1>{{ posts.project_Name }}</h1>
-        <p>{{ posts.project_SpaceAvailable }} spaces available</p>
+        <h1>{{ proj.project_Name }}</h1>
+        <p>{{ proj.project_SpaceAvailable }} spaces available</p>
         <a class="text-primary" href="join/">Join Project</a>
     </div>
 </div>
@@ -12,11 +12,11 @@
     <div class="row">
         <div class="col">
             <h2>Project Overview</h2>
-            <p>{{ posts.project_Description }}</p>
+            <p>{{ proj.project_Description }}</p>
         </div>
         <div class="col">
             <h2>Project Admin</h2>
-            <p>{{ posts.project_Admin }}</p>
+            <p>{{ proj.project_Admin }}</p>
             <P></P>
         </div>
     </div>
@@ -36,9 +36,20 @@
         <tbody>
             <tr>
                 <th scope="row">1</th>
-                <td>{{ posts.project_Admin }}</td>
+                <td>{{ proj.project_Admin }}</td>
                 <td></td>
             </tr>
+            {% for m in members %}
+            <tr>
+                <th scope="row">1</th>
+                {% if m %}
+                <td>{{ m.profile_username }}</td>
+                {% else %}
+                <td>Empty</td>
+                {% endif %}
+                <td></td>
+            </tr>
+            {% endfor %}
             <tr>
                 <th scope="row">2</th>
                 <td>Empty</td>

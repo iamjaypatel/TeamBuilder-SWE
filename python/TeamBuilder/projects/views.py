@@ -21,24 +21,33 @@ def createProjView(request):
             newProj.project_Description = form.cleaned_data['proj_descr']
             newProj.project_SpaceAvailable = 9
             newProj.save()
-            return HttpResponseRedirect('/projects/') # Returns to projects page **ToDo: add success alert, should be easy
+            newPIE = Project_Involved()
+            newPIE.project_involved_username = Profile.objects.get(profile_username = request.user.username)
+            newPIE.project_involved_id = newProj
+            newPIE.project_involved_accepted = True # Default acceptance for Admin is true
+            newPIE.save()
+        return HttpResponseRedirect('/projects/') # Returns to projects page **ToDo: add success alert, should be easy
     else:
-        form = createProjForm()
-    return render(request, 'projects/createProj.html', {'form': form})
+        return render(request, 'projects/createProj.html', {'form': form})
 
 def uniqueP(request, ID):
     # Query project ID and pass to page
-    posts = Project.objects.get(project_id=ID)
+    proj = Project.objects.get(project_id=ID)
+    members = Project_Involved.objects.filter(project_involved_id = proj) # Query of project_involved entries for given project
+    memlist = []
+    for m in members:
+        memlist.append(Profile.objects.get(m.project_involved_username))
     data = {
-        'posts': posts
+        'proj': proj,
+        'memlist': memlist
     }
     return render(request,'projects/project.html', data)
 
 def myProjectsView(request):
     # Get all projects with current user as admin, display on projects page
     if request.user.is_authenticated:
-        Profile = Profile.objects.get(profile_username = request.user.username)
-        projects = Project.objects.filter(project_Admin = Profile)
+        curProfile = Profile.objects.get(profile_username = request.user.username)
+        projects = Project.objects.filter(project_Admin = curProfile)
         data = {
             'projects': projects
         }
@@ -60,12 +69,11 @@ def joinP(request, ID):
 
         else:
             pie = Project_Involved() # Project-Involved Entry
-            pie.profile_username = request.user.username
-            pie.project_id = ID
-            pie.project_accepted = False
+            pie.project_involved_username = Profile.
+            pie.project_involved_id =
+            pie.project_involved_accepted
             pie.save()
         # Check space, add project_involved entry
-        # Q: when should we modify the project DB? - Acceptance or immediately, checking flag at reference
 
         return HttpResponseRedirect('/projects/myProjects/')
     else:
