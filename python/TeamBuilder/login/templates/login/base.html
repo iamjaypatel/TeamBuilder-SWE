@@ -23,7 +23,12 @@
                     <a class="nav-link" href="{% url 'user-page' username=user.username %}">{{user.username}}'s Profile</a>
                     
                 </li>
-
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'projects-my' %}">Your Projects</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'createP' %}">Create Project</a>
+                </li>
                 {% endif %}
             </ul>
             <div class="d-flex flex-row-reverse ">

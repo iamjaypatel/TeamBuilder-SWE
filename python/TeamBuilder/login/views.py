@@ -14,13 +14,11 @@ def register(request):
     if request.method == "POST":
         form = UserCreationForm(request.POST)
         if form.is_valid():
+            newP = Profile()
+            newP.profile_username = form.cleaned_data['username']
+            newP.profile_password = form.cleaned_data['password1']
+            newP.save()
             user = form.save()
-            newProfile = Profile()
-            username = form.cleaned_data.get('username')
-            password = form.cleaned_data.get('password')
-            newProfile.profile_username = username
-            newProfile.profile_password = password
-            newProfile.save()
             login(request, user)
             return redirect(index)
         else:
