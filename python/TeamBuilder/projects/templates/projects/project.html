@@ -16,7 +16,7 @@
         </div>
         <div class="col">
             <h2>Project Admin</h2>
-            <p>{{ proj.project_Admin }}</p>
+            <p>{{ proj.project_Admin.profile_username }}</p>
             <P></P>
         </div>
     </div>
@@ -43,58 +43,13 @@
             <tr>
                 <th scope="row">1</th>
                 {% if m %}
-                <td>{{ m.profile_username }}</td>
+                <td>{{ m.project_involved_username.profile_username }}</td>
                 {% else %}
                 <td>Empty</td>
                 {% endif %}
                 <td></td>
             </tr>
             {% endfor %}
-            <tr>
-                <th scope="row">2</th>
-                <td>Empty</td>
-                <td></td>
-            </tr>
-            <tr>
-                <th scope="row">3</th>
-                <td>Empty</td>
-                <td></td>
-            </tr>
-            <tr>
-                <th scope="row">4</th>
-                <td>Empty</td>
-                <td></td>
-            </tr>
-            <tr>
-                <th scope="row">5</th>
-                <td>Empty</td>
-                <td></td>
-            </tr>
-            <tr>
-                <th scope="row">6</th>
-                <td>Empty</td>
-                <td></td>
-            </tr>
-            <tr>
-                <th scope="row">7</th>
-                <td>Empty</td>
-                <td></td>
-            </tr>
-            <tr>
-                <th scope="row">8</th>
-                <td>Empty</td>
-                <td></td>
-            </tr>
-            <tr>
-                <th scope="row">9</th>
-                <td>Empty</td>
-                <td></td>
-            </tr>
-            <tr>
-                <th scope="row">10</th>
-                <td>Empty</td>
-                <td></td>
-            </tr>
         </tbody>
     </table>
 </div>

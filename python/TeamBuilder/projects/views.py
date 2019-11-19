@@ -28,18 +28,16 @@ def createProjView(request):
             newPIE.save()
         return HttpResponseRedirect('/projects/') # Returns to projects page **ToDo: add success alert, should be easy
     else:
+        form = createProjForm
         return render(request, 'projects/createProj.html', {'form': form})
 
 def uniqueP(request, ID):
     # Query project ID and pass to page
     proj = Project.objects.get(project_id=ID)
-    members = Project_Involved.objects.filter(project_involved_id = proj) # Query of project_involved entries for given project
-    memlist = []
-    for m in members:
-        memlist.append(Profile.objects.get(m.project_involved_username))
+    members = Project_Involved.objects.filter(project_involved_id = proj)
     data = {
         'proj': proj,
-        'memlist': memlist
+        'members': members
     }
     return render(request,'projects/project.html', data)
 
@@ -47,7 +45,11 @@ def myProjectsView(request):
     # Get all projects with current user as admin, display on projects page
     if request.user.is_authenticated:
         curProfile = Profile.objects.get(profile_username = request.user.username)
-        projects = Project.objects.filter(project_Admin = curProfile)
+        #projects = Project.objects.filter(project_Admin = curProfile)
+        projlist = Project_Involved.objects.filter(project_involved_username = curProfile) # Set of Project_Involved for current profile
+        projects = []
+        for p in projlist:
+            projects.append(p.project_involved_id) # for every Project_Involved entry, pull Project object, put into list of Project objects
         data = {
             'projects': projects
         }
@@ -61,18 +63,25 @@ def joinP(request, ID):
 
         if not project:
             print()
-            # ToDo: add failure alert
+            # ToDo: add failure alert: project does not exist
 
         elif project.project_SpaceAvailable <= 0:
             print()
-            # ToDo: add failure alert
+            # ToDo: add failure alert: no space available
+
+        elif Project_Involved.objects.get(project_involved_id = project, project_involved_username = request.user.username) is not None:
+            print()
+            # ToDo: add failure alert: already in project
 
         else:
             pie = Project_Involved() # Project-Involved Entry
-            pie.project_involved_username = Profile.
-            pie.project_involved_id =
-            pie.project_involved_accepted
+            pie.project_involved_username = Profile.objects.get(profile_username = request.user.username)
+            pie.project_involved_id = project
+            pie.project_involved_accepted = False
             pie.save()
+            project.project_SpaceTaken = project.project_SpaceTaken + 1
+            project.project_SpaceAvailable = project.project_SpaceAvailable - 1
+            project.save()
         # Check space, add project_involved entry
 
         return HttpResponseRedirect('/projects/myProjects/')
