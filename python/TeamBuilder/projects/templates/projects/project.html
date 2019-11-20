@@ -5,7 +5,13 @@
     <div class="container text-center p-3">
         <h1>{{ proj.project_Name }}</h1>
         <p>{{ proj.project_SpaceAvailable }} spaces available</p>
-        <a class="text-primary" href="join/">Join Project</a>
+        {% if access %}
+        <a class="btn btn-outline-dark" href="delete/">Delete Project</a>
+        {% elif not involved %}
+        <a class="btn btn-outline-dark" href="join/">Join Project</a>
+        {% else %}
+        <a class="btn btn-outline-dark" href="leave/">Leave Project</a>
+        {% endif %}
     </div>
 </div>
 <div class="container text-center p-3">
@@ -38,14 +44,24 @@
             <tr>
                 {% if m %}
                 <th scope="row">{{ m.project_involved_username.profile_username }}</th>
-                <td>{{ m.project_involved_username.profile_firstName }} {{ m.project_involved_username.profile_lastName }}</td>
+                <td>{{ m.project_involved_username.profile_firstName }}
+                    {{ m.project_involved_username.profile_lastName }}</td>
                 <td>{{ m.project_involved_username.profile_Email }}</td>
+                    {% if access %}
+                    <td>
+                    {% if not m.project_involved_accepted %}
+                        <a class="btn btn-outline-dark" href="{% url 'aProject' ID=m.project_involved_id.project_id username=m.project_involved_username.profile_username %}">Accept</a>
+                        <a class="btn btn-outline-dark" href="{% url 'rProject' ID=m.project_involved_id.project_id username=m.project_involved_username.profile_username %}">Reject</a>
+                    {% else %}
+                    <p>Accepted</p>
+                    {% endif %}
+                    </td>
+                    {% endif %}
                 {% else %}
                 <th scope="row">Empty</th>
                 <td></td>
                 <td></td>
                 {% endif %}
-                <td></td>
             </tr>
             {% endfor %}
         </tbody>
