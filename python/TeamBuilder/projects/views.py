@@ -64,7 +64,7 @@ def myProjectsView(request):
         }
         return render(request, 'projects/projhome.html', data)
     else:
-        return render(request, 'login/')
+        return render(request, 'login/index.html')
 
 def joinP(request, ID):
     if request.user.is_authenticated:
