@@ -1,5 +1,5 @@
 from django.http import HttpResponse, HttpResponseRedirect
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from login.models import Project, Profile, Project_Involved
 from projects.forms import createProjForm
 
@@ -35,9 +35,18 @@ def uniqueP(request, ID):
     # Query project ID and pass to page
     proj = Project.objects.get(project_id=ID)
     members = Project_Involved.objects.filter(project_involved_id = proj)
+    access = False
+    involved = False
+    if request.user.username == proj.project_Admin.profile_username:
+        access = True
+    inv = Project_Involved.objects.filter(project_involved_id = proj, project_involved_username = request.user.username)
+    if inv:
+        involved = True
     data = {
         'proj': proj,
-        'members': members
+        'members': members,
+        'access': access,
+        'involved': involved
     }
     return render(request,'projects/project.html', data)
 
@@ -85,5 +94,57 @@ def joinP(request, ID):
         # Check space, add project_involved entry
 
         return HttpResponseRedirect('/projects/myProjects/')
+    else:
+        return render(request, 'login/')
+
+
+def acceptP(request, ID, username):
+    if request.user.is_authenticated:
+        involved = Project_Involved.objects.filter(project_involved_id = ID, project_involved_username = username)
+        if involved:
+            involved = Project_Involved.objects.get(project_involved_id = ID, project_involved_username = username)
+            involved.project_involved_accepted = True
+            involved.save()
+        return HttpResponseRedirect('/projects/' + str(ID))
+    else:
+        return render(request, 'login/')
+
+def rejectP(request, ID, username):
+    if request.user.is_authenticated:
+        involved = Project_Involved.objects.filter(project_involved_id = ID, project_involved_username = username)
+        if involved:
+            involved = Project_Involved.objects.get(project_involved_id = ID, project_involved_username = username)
+            proj = involved.project_involved_id
+            proj.project_SpaceAvailable = proj.project_SpaceAvailable + 1
+            proj.project_SpaceTaken = proj.project_SpaceTaken - 1
+            proj.save()
+            involved.delete()
+        return HttpResponseRedirect('/projects/' + str(ID))
+    else:
+        return render(request, 'login/')
+
+def leaveP(request, ID):
+    if request.user.is_authenticated:
+        involved = Project_Involved.objects.filter(project_involved_id = ID, project_involved_username = request.user.username)
+        if involved:
+            involved = Project_Involved.objects.get(project_involved_id = ID, project_involved_username = request.user.username)
+            proj = involved.project_involved_id
+            proj.project_SpaceAvailable = proj.project_SpaceAvailable + 1
+            proj.project_SpaceTaken = proj.project_SpaceTaken - 1
+            proj.save()
+            involved.delete()
+        return HttpResponseRedirect('/projects/')
+    else:
+        return render(request, 'login/')
+
+def deleteP(request, ID):
+    if request.user.is_authenticated:
+        proj = Project.objects.get(project_id = ID)
+        if(proj.project_Admin.profile_username == request.user.username):
+            involved = Project_Involved.objects.filter(project_involved_id = ID)
+            for i in involved:
+                i.delete()
+            proj.delete()
+        return HttpResponseRedirect('/projects/')
     else:
         return render(request, 'login/')
