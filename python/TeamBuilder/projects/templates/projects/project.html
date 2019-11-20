@@ -22,30 +22,28 @@
     </div>
 </div>
 <div class="container text-center p-3">
-    <h2>Events and Meetings</h2>
+    <h2>Project Members</h2>
 </div>
 <div class="container p-3">
     <table class="table table-bordered">
         <thead>
             <tr>
-                <th scope="col">Posistion</th>
-                <th scope="col">User</th>
+                <th scope="col">Username</th>
+                <th scope="col">Name</th>
                 <th scope="col">Email</th>
             </tr>
         </thead>
         <tbody>
-            <tr>
-                <th scope="row">1</th>
-                <td>{{ proj.project_Admin }}</td>
-                <td></td>
-            </tr>
             {% for m in members %}
             <tr>
-                <th scope="row">1</th>
                 {% if m %}
-                <td>{{ m.project_involved_username.profile_username }}</td>
+                <th scope="row">{{ m.project_involved_username.profile_username }}</th>
+                <td>{{ m.project_involved_username.profile_firstName }} {{ m.project_involved_username.profile_lastName }}</td>
+                <td>{{ m.project_involved_username.profile_Email }}</td>
                 {% else %}
-                <td>Empty</td>
+                <th scope="row">Empty</th>
+                <td></td>
+                <td></td>
                 {% endif %}
                 <td></td>
             </tr>
