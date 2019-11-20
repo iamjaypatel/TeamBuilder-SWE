@@ -43,7 +43,9 @@
             {% for m in members %}
             <tr>
                 {% if m %}
-                <th scope="row">{{ m.project_involved_username.profile_username }}</th>
+                <th scope="row">
+                    <a href="{% url 'user-page' username=m.project_involved_username.profile_username %}">{{ m.project_involved_username.profile_username }}</a>
+                </th>
                 <td>{{ m.project_involved_username.profile_firstName }}
                     {{ m.project_involved_username.profile_lastName }}</td>
                 <td>{{ m.project_involved_username.profile_Email }}</td>
