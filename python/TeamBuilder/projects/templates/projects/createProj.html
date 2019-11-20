@@ -1,14 +1,15 @@
 {% extends "login/base.html" %}
 {% block body %}
-<div class="container text-center">
-    <h1>Create Project</h1>
-    <br>
-    <form class="login-form" method="post">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <!-- <input class="input-group-text" type="text" name="proj_name">
-        <input class="input-group-text" type="text" name="proj_descr"> -->
-        <button type="submit" value="Submit">Create Project</button>
-    </form>
-</div>
+    <div class="container">
+        <div class="row">
+            <h1>Create Project</h1>
+        </div>
+        <div class="row">
+            <form method="post">
+                {% csrf_token %}
+                <ul>{{ form.as_ul }}</ul>
+                <input type="submit" value="Submit">
+            </form>
+        </div>
+    </div>
 {% endblock body %}
