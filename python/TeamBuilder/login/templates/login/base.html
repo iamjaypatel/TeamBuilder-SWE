@@ -22,7 +22,14 @@
                     <a class="nav-link" href="{% url 'projects-home' %}">Public projects</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{% url 'user-page' username=user.username %}">Your Profile</a>
+                    <a class="nav-link" href="{% url 'user-page' username=user.username %}">{{user.username}}'s Profile</a>
+                    
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'projects-my' %}">Your Projects</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'createP' %}">Create Project</a>
                 </li>
                 {% endif %}
             </ul>
