@@ -4,6 +4,7 @@ from .models import Profile
 from login.forms import editProfForm
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.forms import UserCreationForm
+from django.contrib import messages
 
 # Create your views here.
 def logout_view(request):
@@ -42,7 +43,8 @@ def index(request):
         return HttpResponseRedirect('/projects/')
         ...
     else:
-        # Return an 'invalid login' error message.
+        # messages.error(request,'username or password not correct')
+        # return redirect(index)
         ...
     return render(request,'login/index.html')
 
