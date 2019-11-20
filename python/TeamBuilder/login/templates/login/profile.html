@@ -4,12 +4,16 @@
 <div class="container text-center">
     {% if access %}
     <h2>Feel free to edit your Profile</h2>
+    <form method="POST">
     {% csrf_token %}
+    {{form.as_p}}
+    <button type="submit">Apply Changes</button>
     <p class="p-3">{{user.username}} is the current user logged in and
         {{userView.profile_username}} is the profile you are viewing </p>
     <p class="p-3"> First Name : {{userView.profile_firstName}}</p>
     <p class="p-3"> Last Name : {{userView.profile_lastName}} </p>
     <p class="p-3"> Email: {{userView.profile_Email}} </p>
+    </form>
     {% else %}
     <h2 class="p-3">{{userView.profile_username}}</h2>
     <p class="p-3"> First Name : {{userView.profile_firstName}}</p>

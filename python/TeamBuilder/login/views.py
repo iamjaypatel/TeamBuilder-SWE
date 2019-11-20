@@ -64,18 +64,26 @@ def index(request):
 #         return render(request,'login/')
 
 def profile(request, username): # when username is searched through URL, if current user is logged-in find searched user and load profile page
-    # if request.method == 'POST':
-
+    if request.method == 'POST':
+        form = editProfForm(request.POST)
+        if form.is_valid() and request.user.is_authenticated:
+            userView = Profile.objects.get(profile_username = username)
+            userView.profile_firstName = form.cleaned_data['prof_firstName']
+            userView.profile_lastName = form.cleaned_data['prof_lastName']
+            userView.profile_Email = form.cleaned_data['prof_Email']
+            userView.save()
+            return redirect(index)
     if request.user.is_authenticated:
         editAccess = False
         userView = Profile.objects.get(profile_username = username)
 
         if userView.profile_username == request.user.username:
             editAccess = True
-            
+        form = editProfForm
         data = {
             'userView':userView,
-            'access':editAccess
+            'access':editAccess,
+            'form':form
         }
        
         return render(request,'login/profile.html', data)
