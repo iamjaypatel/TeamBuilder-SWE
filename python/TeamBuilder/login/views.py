@@ -89,3 +89,6 @@ def profile(request, username): # when username is searched through URL, if curr
         return render(request,'login/profile.html', data)
     else:
         return render(request,'login/')
+
+def help(request):
+    return render(request, 'login/help.html')

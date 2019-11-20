@@ -1,0 +1,36 @@
+{% extends "login/base.html" %}
+
+{% block body %}
+<h1>Help Page</h1>
+<h3>Getting started:</h3>
+<ul>
+    <li>From the login page, click "Create an Account" and fill in your information</li>
+    <li>Once created, fill in your credentials on the login page and click "Login"</li>
+    <li>From there, you will be directed to the Public Projects page, listing all projects currently active on the site</li>
+</ul>
+<h3>Using the Navbar</h3>
+<ul>
+    <li>At the top of the screen on all logged-in pages there is a gray navigation bar with links to different sections of the site.</li>
+    <li>Public Projects: Takes you to the page listing all active projects on the site.</li>
+    <li>Username's Profile: Will say your username in place of "Username", takes you to version of your user-page, where you can edit
+                            your personal information that will be visible by others.</li>
+    <li>Your Projects: Filters the public projects page to show only projects you are involved with (as either admin or member)</li>
+    <li>Create Project: Form to create a new project and add it to the site</li>
+    <li>Help Page: Takes you back to this page.</li>
+</ul>
+<h3>Creating a project</h3>
+<ul>
+    <li>To create a project, click "Create Project" at the top of the page inside the navigation bar</li>
+    <li>Fill in the requested information for your new project, then hit submit</li>
+    <li>Once submitted, you will be redirected to the Public Projects page, where your project will appear with other projects</li>
+</ul>
+<h3>Joining other's projects</h3>
+<ul>
+    <li>To join another user's project, you must go to the project's page by clicking it's name from either the public project page or
+        from the my projects page
+    </li>
+    <li>From the project's individual page, if there is space available in the project you can click "Join" to request to join a project</li>
+    <li>Once you request to join, you must wait until the project admin goes into the project's page to accept or reject your request</li>
+    <li>If you are rejected, you will be removed from the list of members in the project</li>
+</ul>
+{% endblock %}
