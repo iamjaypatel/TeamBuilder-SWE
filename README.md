@@ -1,4 +1,4 @@
-# CS1530: Software Engineering Group Project
+# CS1530: Software Engineering Group Project: Team Builder Website
 
 - Group 14
 	- Jay Patel(jjp107)
